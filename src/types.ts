@@ -2,6 +2,8 @@ import type {
   Animated,
   LayoutRectangle,
   NativeMethods,
+  StyleProp,
+  TextStyle,
   ViewStyle,
 } from "react-native";
 
@@ -44,6 +46,7 @@ export type Labels = Partial<
 
 export interface TooltipProps {
   labels: Labels;
+  labelButtonStyle?: StyleProp<TextStyle>;
 }
 
 export interface MaskProps {
@@ -69,15 +72,16 @@ export interface CopilotOptions {
   animationDuration?: number;
   tooltipComponent?: React.ComponentType<TooltipProps>;
   tooltipStyle?: ViewStyle;
-  stepNumberComponent?: React.ComponentType<any >;
+  stepNumberComponent?: React.ComponentType<any>;
   animated?: boolean;
   labels?: Labels;
   androidStatusBarVisible?: boolean;
   svgMaskPath?: SvgMaskPathFunction;
   verticalOffset?: number;
   arrowColor?: string;
-  arrowSize?: number
-  margin?: number
+  arrowSize?: number;
+  margin?: number;
   stopOnOutsideClick?: boolean;
   backdropColor?: string;
+  labelButtonStyle?: StyleProp<TextStyle>;
 }

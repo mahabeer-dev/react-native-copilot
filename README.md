@@ -1,15 +1,28 @@
-<h1 align="center">React Native Copilot</h1>
+<h1 align="center">@mr-mahabeer/react-native-copilot</h1>
+
+<p align="center">
+  This is a maintained fork of react-native-copilot with bug fixes and improvements.
+</p>
+
+## Why this fork?
+
+- **Fixes pending issues** — Addresses open problems from the upstream project where practical.
+- **Active maintenance** — Regular updates, reviews, and releases for dependents who need a supported line.
+
+## Credits
+
+This project is based on [react-native-copilot](https://github.com/mohebifar/react-native-copilot) by Mohamad Mohebifar.
 
 <div align="center">
   <p align="center">
     <a href="https://github.com/mohebifar/react-native-copilot/actions/workflows/release.yml">
       <img src="https://img.shields.io/github/actions/workflow/status/mohebifar/react-native-copilot/release.yml?branch=master&style=flat-square" alt="Build Status" />
     </a>
-    <a href="https://www.npmjs.com/package/react-native-copilot">
-      <img src="https://img.shields.io/npm/v/react-native-copilot.svg?style=flat-square" alt="NPM Version" />
+    <a href="https://www.npmjs.com/package/@mr-mahabeer/react-native-copilot">
+      <img src="https://img.shields.io/npm/v/@mr-mahabeer/react-native-copilot.svg?style=flat-square" alt="NPM Version" />
     </a>
-    <a href="https://www.npmjs.com/package/react-native-copilot">
-      <img src="https://img.shields.io/npm/dm/react-native-copilot.svg?style=flat-square" alt="NPM Downloads" />
+    <a href="https://www.npmjs.com/package/@mr-mahabeer/react-native-copilot">
+      <img src="https://img.shields.io/npm/dm/@mr-mahabeer/react-native-copilot.svg?style=flat-square" alt="NPM Downloads" />
     </a>
   </p>
 </div>
@@ -31,11 +44,11 @@
 ## Installation
 
 ```
-yarn add react-native-copilot
+yarn add @mr-mahabeer/react-native-copilot
 
 # or with npm:
 
-npm install --save react-native-copilot
+npm install --save @mr-mahabeer/react-native-copilot
 ```
 
 **Optional**: If you want to have the smooth SVG animation, you should install and link [`react-native-svg`](https://github.com/software-mansion/react-native-svg).
@@ -45,7 +58,7 @@ npm install --save react-native-copilot
 Wrap the portion of your app that you want to use copilot with inside `<CopilotProvider>`:
 
 ```js
-import { CopilotProvider } from "react-native-copilot";
+import { CopilotProvider } from "@mr-mahabeer/react-native-copilot";
 
 const AppWithCopilot = () => {
   return (
@@ -65,7 +78,7 @@ import {
   CopilotProvider,
   CopilotStep,
   walkthroughable,
-} from "react-native-copilot";
+} from "@mr-mahabeer/react-native-copilot";
 
 const CopilotText = walkthroughable(Text);
 
@@ -284,7 +297,7 @@ const customSvgPath = (args) => {
 The components wrapped inside `CopilotStep`, will receive a `copilot` prop with a mutable `ref` and `onLayou` which the outermost rendered element of the component or the element that you want the tooltip be shown around, must extend.
 
 ```js
-import { CopilotStep } from "react-native-copilot";
+import { CopilotStep } from "@mr-mahabeer/react-native-copilot";
 
 const CustomComponent = ({ copilot }) => (
   <View {...copilot}>
@@ -368,7 +381,7 @@ List of available events is:
 **Example:**
 
 ```js
-import { useCopilot } from "react-native-copilot";
+import { useCopilot } from "@mr-mahabeer/react-native-copilot";
 
 const HomeScreen = () => {
   const { copilotEvents } = useCopilot();
