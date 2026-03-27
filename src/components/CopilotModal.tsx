@@ -52,6 +52,7 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
       animationDuration = 400,
       tooltipComponent: TooltipComponent = Tooltip,
       tooltipStyle = {},
+      labelButtonStyle = {},
       stepNumberComponent: StepNumberComponent = StepNumber,
       overlay = typeof NativeModules.RNSVGSvgViewManager !== "undefined"
         ? "svg"
@@ -272,15 +273,11 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
       }
     };
 
-    useImperativeHandle(
-      ref,
-      () => {
-        return {
-          animateMove,
-        };
-      },
-      [animateMove],
-    );
+    useImperativeHandle(ref, () => {
+      return {
+        animateMove,
+      };
+    }, [animateMove]);
 
     const modalVisible = containerVisible || visible;
     const contentVisible = layout != null && containerVisible;
@@ -361,7 +358,10 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
             key="tooltip"
             style={[styles.tooltip, tooltipStyles, tooltipStyle]}
           >
-            <TooltipComponent labels={labels} />
+            <TooltipComponent
+              labelButtonStyle={labelButtonStyle}
+              labels={labels}
+            />
           </Animated.View>
         </>
       );
