@@ -225,6 +225,34 @@ You can customize the tooltip's arrow color:
 </CopilotProvider>
 ```
 
+### Additional `CopilotProvider` options
+
+These optional props are available on `<CopilotProvider>`:
+
+- **`stopOnOutsideClick`** (`boolean`, default `false`) — When `true`, tapping the dimmed backdrop (outside the highlighted step) ends the tour, same as skipping.
+
+- **`labelButtonStyle`** — `StyleProp<TextStyle>` applied to the default tooltip’s action labels (Skip, Previous, Next, Finish). If you use a custom `tooltipComponent`, it receives `labelButtonStyle` (and `labels`) as props—see [`TooltipProps`](https://github.com/mahabeer-dev/react-native-copilot/blob/master/src/types.ts).
+
+- **`shouldShowStepNumber`** (`boolean`, default `true`) — Set to `false` to hide the circular step-number badge.
+
+- **`arrowSize`** (`number`, default `6`) — Size of the tooltip pointer (arrow). Use `0` to hide the arrow.
+
+- **`margin`** (`number`, default `13`) — Minimum spacing between the highlighted area and the tooltip when the library positions the tooltip on screen.
+
+Example combining several options:
+
+```js
+<CopilotProvider
+  stopOnOutsideClick
+  shouldShowStepNumber={false}
+  arrowSize={0}
+  margin={16}
+  labelButtonStyle={{ fontSize: 16, fontWeight: "600" }}
+>
+  <App />
+</CopilotProvider>
+```
+
 ### Custom overlay color
 
 You can customize the mask color - default is `rgba(0, 0, 0, 0.4)`, by passing a color string to the `CopilotProvider` component.
