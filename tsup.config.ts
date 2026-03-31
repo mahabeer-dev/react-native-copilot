@@ -23,7 +23,7 @@ export default defineConfig({
         ["dist/index.js", "dist/index.d.ts"].map(async (file) => {
           const outputPath = path.resolve(exampleOutputPath, file);
           console.log("Copying file: ", file, "to ->", outputPath);
-          // await fs.copyFile(file, outputPath);
+          await fs.copyFile(file, outputPath);
         }),
       );
       await fs.rm(exampleOutputNodeModulesPath, {
