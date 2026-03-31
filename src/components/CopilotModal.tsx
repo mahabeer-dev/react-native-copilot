@@ -155,7 +155,12 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
           relativeToLeft > relativeToRight ? "left" : "right";
 
         const tooltip: ViewStyle = {};
-        const arrow: ViewStyle = {};
+        const arrow: ViewStyle = {
+          width: 0,
+          height: 0,
+          backgroundColor: "transparent",
+          borderWidth: arrowSize,
+        };
 
         arrow.position = "absolute";
 

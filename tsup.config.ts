@@ -12,19 +12,19 @@ export default defineConfig({
   async onSuccess() {
     if (process.env.NODE_ENV === "development") {
       const exampleOutputPath = path.resolve(
-        "./example/node_modules/react-native-copilot"
+        "./example/node_modules/react-native-copilot",
       );
       const exampleOutputNodeModulesPath = path.resolve(
         exampleOutputPath,
-        "node_modules"
+        "node_modules",
       );
 
       await Promise.all(
         ["dist/index.js", "dist/index.d.ts"].map(async (file) => {
           const outputPath = path.resolve(exampleOutputPath, file);
           console.log("Copying file: ", file, "to ->", outputPath);
-          await fs.copyFile(file, outputPath);
-        })
+          // await fs.copyFile(file, outputPath);
+        }),
       );
       await fs.rm(exampleOutputNodeModulesPath, {
         recursive: true,

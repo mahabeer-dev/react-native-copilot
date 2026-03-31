@@ -1,6 +1,6 @@
 {
   "name": "@mr-mahabeer/react-native-copilot",
-  "version": "3.3.6",
+  "version": "3.3.7",
   "description": "Maintained fork of react-native-copilot with bug fixes and improvements",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
