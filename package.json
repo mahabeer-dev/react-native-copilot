@@ -1,6 +1,6 @@
 {
   "name": "@mr-mahabeer/react-native-copilot",
-  "version": "3.3.5",
+  "version": "3.3.6",
   "description": "Maintained fork of react-native-copilot with bug fixes and improvements",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,7 +12,8 @@
     "lint": "eslint src/ --ext .ts,.tsx",
     "test": "jest",
     "changeset": "changeset",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "build:pack": "yarn build && npm pack"
   },
   "repository": {
     "type": "git",

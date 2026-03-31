@@ -84,4 +84,5 @@ export interface CopilotOptions {
   stopOnOutsideClick?: boolean;
   backdropColor?: string;
   labelButtonStyle?: StyleProp<TextStyle>;
+  shouldShowStepNumber?: boolean;
 }

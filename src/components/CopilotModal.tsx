@@ -54,6 +54,7 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
       tooltipStyle = {},
       labelButtonStyle = {},
       stepNumberComponent: StepNumberComponent = StepNumber,
+      shouldShowStepNumber = true,
       overlay = typeof NativeModules.RNSVGSvgViewManager !== "undefined"
         ? "svg"
         : "view",
@@ -273,11 +274,15 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
       }
     };
 
-    useImperativeHandle(ref, () => {
-      return {
-        animateMove,
-      };
-    }, [animateMove]);
+    useImperativeHandle(
+      ref,
+      () => {
+        return {
+          animateMove,
+        };
+      },
+      [animateMove],
+    );
 
     const modalVisible = containerVisible || visible;
     const contentVisible = layout != null && containerVisible;
@@ -339,18 +344,21 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
       }
       return (
         <>
-          <Animated.View
-            key="stepNumber"
-            style={[
-              styles.stepNumberContainer,
-              {
-                left: animatedValues.stepNumberLeft,
-                top: Animated.add(animatedValues.top, -STEP_NUMBER_RADIUS),
-              },
-            ]}
-          >
-            <StepNumberComponent />
-          </Animated.View>
+          {shouldShowStepNumber && (
+            <Animated.View
+              key="stepNumber"
+              style={[
+                styles.stepNumberContainer,
+                {
+                  left: animatedValues.stepNumberLeft,
+                  top: Animated.add(animatedValues.top, -STEP_NUMBER_RADIUS),
+                },
+              ]}
+            >
+              <StepNumberComponent />
+            </Animated.View>
+          )}
+
           {!!arrowSize && (
             <Animated.View key="arrow" style={[styles.arrow, arrowStyles]} />
           )}
