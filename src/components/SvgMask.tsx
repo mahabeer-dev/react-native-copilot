@@ -17,15 +17,27 @@ const defaultSvgPath: SvgMaskPathFunction = ({
   size,
   position,
   canvasSize,
+  borderRadius: br = 0,
 }): string => {
-  const positionX = (position.x as any)._value as number;
-  const positionY = (position.y as any)._value as number;
-  const sizeX = (size.x as any)._value as number;
-  const sizeY = (size.y as any)._value as number;
+  const x = (position.x as any)._value as number;
+  const y = (position.y as any)._value as number;
+  const w = (size.x as any)._value as number;
+  const h = (size.y as any)._value as number;
 
-  return `M0,0H${canvasSize.x}V${canvasSize.y}H0V0ZM${positionX},${positionY}H${
-    positionX + sizeX
-  }V${positionY + sizeY}H${positionX}V${positionY}Z`;
+  const r = Math.max(0, Math.min(br, w / 2, h / 2));
+
+  if (r <= 0) {
+    return `M0,0H${canvasSize.x}V${canvasSize.y}H0V0ZM${x},${y}H${x + w}V${y + h}H${x}V${y}Z`;
+  }
+
+  return [
+    `M0,0H${canvasSize.x}V${canvasSize.y}H0V0Z`,
+    `M${x + r},${y}`,
+    `H${x + w - r}A${r},${r} 0 0 1 ${x + w},${y + r}`,
+    `V${y + h - r}A${r},${r} 0 0 1 ${x + w - r},${y + h}`,
+    `H${x + r}A${r},${r} 0 0 1 ${x},${y + h - r}`,
+    `V${y + r}A${r},${r} 0 0 1 ${x + r},${y}Z`,
+  ].join("");
 };
 
 export const SvgMask = ({
@@ -37,6 +49,7 @@ export const SvgMask = ({
   animated,
   backdropColor,
   svgMaskPath = defaultSvgPath,
+  borderRadius,
   onClick,
   currentStep,
 }: MaskProps) => {
@@ -58,12 +71,13 @@ export const SvgMask = ({
       position: positionValue,
       canvasSize,
       step: currentStep,
+      borderRadius,
     });
 
     if (maskRef.current) {
       maskRef.current.setNativeProps({ d });
     }
-  }, [canvasSize, currentStep, svgMaskPath, positionValue, sizeValue]);
+  }, [canvasSize, currentStep, svgMaskPath, positionValue, sizeValue, borderRadius]);
 
   const animate = useCallback(
     (toSize: ValueXY = size, toPosition: ValueXY = position) => {
@@ -140,6 +154,7 @@ export const SvgMask = ({
               position: positionValue,
               canvasSize,
               step: currentStep,
+              borderRadius,
             })}
           />
         </Svg>

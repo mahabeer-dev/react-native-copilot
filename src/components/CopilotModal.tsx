@@ -75,7 +75,7 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
     },
     ref,
   ) {
-    const { stop, currentStep, visible } = useCopilot();
+    const { stop, currentStep, visible, steps } = useCopilot();
     const [tooltipStyles, setTooltipStyles] = useState({});
     const [arrowStyles, setArrowStyles] = useState({});
     const [animatedValues] = useState({
@@ -337,6 +337,9 @@ export const CopilotModal = forwardRef<CopilotModalHandle, Props>(
           animationDuration={animationDuration}
           backdropColor={backdropColor}
           svgMaskPath={svgMaskPath}
+          borderRadius={
+            currentStep ? steps[currentStep?.name]?.maskRadius ?? 0 : 0
+          }
           onClick={handleMaskClick}
           currentStep={currentStep}
         />

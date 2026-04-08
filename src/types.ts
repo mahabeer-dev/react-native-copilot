@@ -16,6 +16,7 @@ export interface Step {
   wrapperRef: React.RefObject<NativeMethods>;
   measure: () => Promise<LayoutRectangle>;
   text: string;
+  maskRadius?: number;
 }
 
 export interface CopilotContext {
@@ -34,6 +35,7 @@ export type SvgMaskPathFunction = (args: {
   position: Animated.ValueXY;
   canvasSize: ValueXY;
   step: Step;
+  borderRadius?: number;
 }) => string;
 
 export type StepsMap = Record<string, Step>;
@@ -58,6 +60,7 @@ export interface MaskProps {
   animated: boolean;
   backdropColor: string;
   svgMaskPath?: SvgMaskPathFunction;
+  borderRadius: number;
   layout: {
     width: number;
     height: number;

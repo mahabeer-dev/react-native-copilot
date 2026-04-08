@@ -9,6 +9,7 @@ interface Props {
   text: string;
   children: React.ReactElement<any>;
   active?: boolean;
+  maskRadius?: number;
 }
 
 export const CopilotStep = ({
@@ -17,6 +18,7 @@ export const CopilotStep = ({
   text,
   children,
   active = true,
+  maskRadius = 0,
 }: Props) => {
   const registeredName = useRef<string | null>(null);
   const { registerStep, unregisterStep } = useCopilot();
@@ -61,10 +63,11 @@ export const CopilotStep = ({
         measure,
         wrapperRef,
         visible: true,
+        maskRadius,
       });
       registeredName.current = name;
     }
-  }, [name, order, text, registerStep, unregisterStep, active]);
+  }, [name, order, text, registerStep, unregisterStep, active, maskRadius]);
 
   useEffect(() => {
     if (active) {
@@ -81,7 +84,7 @@ export const CopilotStep = ({
       ref: wrapperRef,
       onLayout: () => {}, // Android hack
     }),
-    []
+    [],
   );
 
   return React.cloneElement(children, { copilot: copilotProps });
