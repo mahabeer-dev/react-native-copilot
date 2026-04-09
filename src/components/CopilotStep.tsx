@@ -9,6 +9,7 @@ interface Props {
   text: string;
   children: React.ReactElement<any>;
   active?: boolean;
+  deleted?: boolean;
   maskRadius?: number;
 }
 
@@ -18,8 +19,10 @@ export const CopilotStep = ({
   text,
   children,
   active = true,
+  deleted = false,
   maskRadius = 0,
 }: Props) => {
+  const shouldRegister = active && !deleted;
   const registeredName = useRef<string | null>(null);
   const { registerStep, unregisterStep } = useCopilot();
   const wrapperRef = React.useRef<NativeMethods | null>(null);
@@ -52,7 +55,7 @@ export const CopilotStep = ({
   };
 
   useEffect(() => {
-    if (active) {
+    if (shouldRegister) {
       if (registeredName.current && registeredName.current !== name) {
         unregisterStep(registeredName.current);
       }
@@ -66,18 +69,21 @@ export const CopilotStep = ({
         maskRadius,
       });
       registeredName.current = name;
+    } else if (registeredName.current) {
+      unregisterStep(registeredName.current);
+      registeredName.current = null;
     }
-  }, [name, order, text, registerStep, unregisterStep, active, maskRadius]);
+  }, [name, order, text, registerStep, unregisterStep, shouldRegister, maskRadius]);
 
   useEffect(() => {
-    if (active) {
+    if (shouldRegister) {
       return () => {
         if (registeredName.current) {
           unregisterStep(registeredName.current);
         }
       };
     }
-  }, [name, unregisterStep, active]);
+  }, [name, unregisterStep, shouldRegister]);
 
   const copilotProps = useMemo(
     () => ({
